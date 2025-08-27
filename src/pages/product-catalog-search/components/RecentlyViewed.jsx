@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate as useRouter } from "react-router-dom";
 import Image from '../../../components/AppImage';
 
 import Button from '../../../components/ui/Button';

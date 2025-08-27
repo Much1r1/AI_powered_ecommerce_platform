@@ -18,14 +18,15 @@ const CustomerDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   // Mock user data
   const userData = {
     id: 1,
-    firstName: "Sarah",
-    lastName: "Johnson",
-    email: "sarah.johnson@email.com",
-    phone: "+1 (555) 123-4567",
+    firstName: "Elvis",
+    lastName: "Muchiri",
+    email: "muchirielvis375@email.com",
+    phone: "+254 745 843 685",
     joinDate: "March 2023",
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
   };
@@ -50,7 +51,7 @@ const CustomerDashboard = () => {
 
   // Mock loyalty data
   const loyaltyData = {
-    currentTier: "Gold Member",
+    currentTier: "Normal Member",
     currentPoints: 2450,
     nextTierPoints: 5000,
     totalSaved: "$247",
@@ -163,7 +164,30 @@ const CustomerDashboard = () => {
       reason: "Frequently bought with similar items"
     }
   ];
-
+  
+  // Chat widget state
+  {isChatOpen && (
+    <div className="fixed bottom-4 right-4 w-80 h-96 bg-card border border-border rounded-xl shadow-lg flex flex-col">
+      <div className="p-3 border-b border-border flex items-center justify-between">
+        <h4 className="font-medium flex items-center">
+          <Icon name="MessageCircle" size={16} className="mr-2 text-primary" />
+          AI Support
+        </h4>
+        <button onClick={() => setIsChatOpen(false)}>
+          <Icon name="X" size={16} />
+        </button>
+      </div>
+      <div className="flex-1 overflow-y-auto p-3">
+        {/* Instead of iframe, directly render your AI Chat Support component */}
+        <iframe 
+          src="/ai-chat-support" 
+          className="w-full h-full rounded-md"
+          title="AI Chat"
+        />
+      </div>
+    </div>
+  )}
+  
   // Mock notifications data
   const [notifications, setNotifications] = useState([
     {

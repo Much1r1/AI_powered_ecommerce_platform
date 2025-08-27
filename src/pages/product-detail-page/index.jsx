@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate as useRouter } from "react-router-dom";
 import ImageGallery from './components/ImageGallery';
 import ProductInfo from './components/ProductInfo';
 import ProductTabs from './components/ProductTabs';

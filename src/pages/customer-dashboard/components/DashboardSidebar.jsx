@@ -45,7 +45,7 @@ const DashboardSidebar = ({ activeTab, onTabChange, notificationCounts }) => {
       label: 'Account Settings',
       icon: 'Settings',
       count: null
-    }
+    },  
   ];
 
   return (

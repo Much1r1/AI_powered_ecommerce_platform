@@ -1,9 +1,10 @@
 import React from "react";
-import Routes from "./Routes";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";  
+import AppRoutes from "./AppRoutes";
 
 function App() {
   return (
-    <Routes />
+    <AppRoutes />
   );
 }
 

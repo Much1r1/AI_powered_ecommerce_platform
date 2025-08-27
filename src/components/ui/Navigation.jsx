@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate, useLocation } from "react-router-dom";
 import Icon from '../AppIcon';
 import Button from './Button';
 

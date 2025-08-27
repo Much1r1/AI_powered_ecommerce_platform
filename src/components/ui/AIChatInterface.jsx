@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate, useLocation } from "react-router-dom";
 import Icon from '../AppIcon';
 import Button from './Button';
 import Input from './Input';

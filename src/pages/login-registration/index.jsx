@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate as useRouter } from "react-router-dom";
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import AuthForm from './components/AuthForm';
@@ -135,8 +135,7 @@ const LoginRegistration = () => {
                 onModeChange={() => handleModeChange(authMode === 'login' ? 'register' : 'login')} 
               />
 
-              {/* Trust Signals */}
-              <TrustSignals />
+              
             </div>
           </div>
         </div>
@@ -159,7 +158,7 @@ const LoginRegistration = () => {
               </a>
             </div>
             <div className="text-sm text-muted-foreground">
-              © {new Date()?.getFullYear()} AI Commerce Hub. All rights reserved.
+              © {new Date()?.getFullYear()} All rights reserved.
             </div>
           </div>
         </div>

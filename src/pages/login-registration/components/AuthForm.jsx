@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from "react-router-dom";
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import { Checkbox } from '../../../components/ui/Checkbox';
 
 const AuthForm = ({ mode, onModeChange }) => {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -96,7 +96,11 @@ const AuthForm = ({ mode, onModeChange }) => {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      router?.push('/customer-dashboard');
+      if (mode === 'login') {
+      navigate('/customer-dashboard');
+    } else {
+      onModeChange();
+    }
     }, 1500);
   };
 

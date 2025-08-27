@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate as useRouter } from "react-router-dom";
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import CartItem from './components/CartItem';
