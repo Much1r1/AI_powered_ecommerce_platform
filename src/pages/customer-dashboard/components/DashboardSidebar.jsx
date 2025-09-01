@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
 const DashboardSidebar = ({ activeTab, onTabChange, notificationCounts }) => {
+  const navigate = useNavigate();
+  
   const menuItems = [
     {
       id: 'overview',
@@ -80,6 +83,7 @@ const DashboardSidebar = ({ activeTab, onTabChange, notificationCounts }) => {
           <Button variant="outline" size="sm" className="w-full">
             <Icon name="MessageCircle" size={14} className="mr-2" />
             Chat Support
+            
           </Button>
         </div>
       </div>

@@ -166,27 +166,6 @@ const CustomerDashboard = () => {
   ];
   
   // Chat widget state
-  {isChatOpen && (
-    <div className="fixed bottom-4 right-4 w-80 h-96 bg-card border border-border rounded-xl shadow-lg flex flex-col">
-      <div className="p-3 border-b border-border flex items-center justify-between">
-        <h4 className="font-medium flex items-center">
-          <Icon name="MessageCircle" size={16} className="mr-2 text-primary" />
-          AI Support
-        </h4>
-        <button onClick={() => setIsChatOpen(false)}>
-          <Icon name="X" size={16} />
-        </button>
-      </div>
-      <div className="flex-1 overflow-y-auto p-3">
-        {/* Instead of iframe, directly render your AI Chat Support component */}
-        <iframe 
-          src="/ai-chat-support" 
-          className="w-full h-full rounded-md"
-          title="AI Chat"
-        />
-      </div>
-    </div>
-  )}
   
   // Mock notifications data
   const [notifications, setNotifications] = useState([
@@ -348,7 +327,7 @@ const CustomerDashboard = () => {
             <p className="text-muted-foreground mb-4">
               Manage your saved payment methods
             </p>
-            <Button>
+            <Button onClick={() => navigate('/payment-methods')}>
               <Icon name="Plus" size={16} className="mr-2" />
               Add Payment Method
             </Button>
@@ -363,7 +342,7 @@ const CustomerDashboard = () => {
             <p className="text-muted-foreground mb-4">
               Update your profile and preferences
             </p>
-            <Button>
+            <Button onClick={() => navigate('/edit-profile')}>
               <Icon name="Edit" size={16} className="mr-2" />
               Edit Profile
             </Button>
