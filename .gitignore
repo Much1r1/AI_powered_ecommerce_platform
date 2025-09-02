@@ -8,3 +8,4 @@ package-lock.json
 vite.config.*s.*
 #Ignore environment variable files
 .env
+.env
