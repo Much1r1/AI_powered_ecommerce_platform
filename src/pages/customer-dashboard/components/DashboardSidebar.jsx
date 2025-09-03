@@ -80,7 +80,7 @@ const DashboardSidebar = ({ activeTab, onTabChange, notificationCounts }) => {
           <p className="text-sm text-muted-foreground mb-4">
             Our AI assistant is here to help you 24/7
           </p>
-          <Button variant="outline" size="sm" className="w-full">
+          <Button variant="outline" size="sm" className="w-full" onClick={() => navigate('/ai-chat-support')}>
             <Icon name="MessageCircle" size={14} className="mr-2" />
             Chat Support
             
