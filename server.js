@@ -1,35 +1,56 @@
+// server.js
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import OpenAI from "openai";
 
-dotenv.config();
+dotenv.config(); // require .env has OPENAI_API_KEY
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+if (!process.env.OPENAI_API_KEY) {
+  console.warn("Warning: OPENAI_API_KEY not found in environment!");
+}
 
-app.post("/chat", async (req, res) => {
-  const { message } = req.body;
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+app.post("/api/chat", async (req, res) => {
   try {
-    const completion = await client.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
+    const { message, history = [] } = req.body;
+
+    // Build messages for OpenAI API
+    const messages = [
+      { role: "system", content: "You are a helpful shopping assistant." },
+      ...history.map((m) => ({
+        role: m.type === "user" ? "user" : "assistant",
+        content: m.content ?? m, // support both object and plain-string items
+      })),
+      { role: "user", content: message },
+    ];
+
+    // Call OpenAI
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini", // or change to your chosen model
+      messages,
+      max_tokens: 1500,
     });
 
-    res.json({ reply: completion.choices[0].message.content });
+    // Be robust: try multiple response shapes
+    const content =
+      response?.choices?.[0]?.message?.content ??
+      response?.choices?.[0]?.text ??
+      (typeof response === "string" ? response : "");
+
+    console.log("OpenAI reply (truncated):", content?.slice(0, 400));
+
+    res.json({ content });
   } catch (err) {
-    console.error("OpenAI API Error:", err);
-    res.status(500).json({ error: "Failed to fetch AI response" });
+    console.error("Server /api/chat error:", err);
+    res.status(500).json({ error: err?.message ?? "unknown error" });
   }
 });
 
-app.listen(5000, () => {
-  console.log("✅ Server running on http://localhost:5000");
-});
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`AI proxy server listening on http://localhost:${PORT}`));

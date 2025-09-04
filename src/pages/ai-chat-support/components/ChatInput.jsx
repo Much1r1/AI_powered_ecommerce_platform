@@ -38,7 +38,18 @@ const ChatInput = ({ onSendMessage, onFileUpload, isLoading, disabled }) => {
       handleSubmit(e);
     }
   };
-
+  
+  const handleSend = async (message) => {
+    setMessages((prev) => [...prev, { role: "user", content: message }]);
+  
+    const reply = await getAIResponse([
+      ...messages,
+      { role: "user", content: message }
+    ]);
+  
+    setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+  };
+  
   return (
     <div className="p-4 border-t border-border bg-card">
       <form onSubmit={handleSubmit} className="space-y-3">
